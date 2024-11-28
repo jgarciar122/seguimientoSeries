@@ -1,17 +1,58 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Seguimiento de series
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/tabs/tab2">
+        <ion-icon slot="icon-only" name="add-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+      <ion-title size="large">Seguimiento de series</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-segment [(ngModel)]="segment">
+    <ion-segment-button value="all">
+      <ion-label>Todos</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="vistas">
+      <ion-label>Vistas</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="no-vistas">
+      <ion-label>No Vistas</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-card *ngFor="let serie of filtrarSeries(); let i = index">
+    <img alt="{{ serie.title }}" [src]="serie.image" />
+    <ion-card-header>
+      <ion-card-title>{{ serie.title }}</ion-card-title>
+      <ion-card-subtitle>{{ serie.description }}</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-checkbox [(ngModel)]="serie.vista"></ion-checkbox>
+      </ion-item>
+
+      <ion-buttons>
+        <ion-button color="primary" (click)="editarSerie(i)">
+          <ion-icon slot="start" name="create"></ion-icon>
+          Editar
+        </ion-button>
+
+        <ion-button color="danger" (click)="eliminarSerie(i)">
+          <ion-icon slot="start" name="trash"></ion-icon>
+          Eliminar
+        </ion-button>
+      </ion-buttons>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
