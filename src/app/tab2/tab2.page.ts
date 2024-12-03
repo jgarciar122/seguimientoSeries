@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { Tab1Page } from '../tab1/tab1.page';
 
 @Component({
@@ -12,23 +13,26 @@ export class Tab2Page {
     title: '',
     description: '',
     image: '',
-    vista: false  // Añadimos la propiedad 'vista' aquí también
+    vista: false  
   };
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private alertController: AlertController) {}
 
-  guardarSerie() {
+  async guardarSerie() {
     if (this.nuevaSerie.title && this.nuevaSerie.description && this.nuevaSerie.image) {
-      // Añadir la nueva serie a la lista de series en Tab1Page
       Tab1Page.series.push({ ...this.nuevaSerie });
 
-      // Limpiar los campos después de guardar la serie
       this.nuevaSerie = { title: '', description: '', image: '', vista: false };
 
-      // Navegar a la página Tab1
       this.router.navigate(['/tabs/tab1']);
     } else {
-      alert('Por favor, complete todos los campos.');
+      const alert = await this.alertController.create({
+        header: 'Campos incompletos',
+        message: 'Por favor, complete todos los campos obligatorios.',
+        buttons: ['OK']
+      });
+
+      await alert.present();
     }
   }
 }

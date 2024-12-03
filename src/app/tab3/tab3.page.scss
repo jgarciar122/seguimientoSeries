@@ -1,0 +1,18 @@
+.content-container {
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente en el contenedor */
+    gap: 20px; /* Espacio entre la imagen y la tarjeta */
+    padding: 20px;
+  }
+  
+  .image {
+    width: 40%; /* Ajusta el ancho de la imagen */
+    height: auto;
+    border-radius: 10px; /* Opcional: bordes redondeados */
+  }
+  
+  .text-card {
+    width: 50%; /* Ajusta el ancho de la tarjeta */
+  }
+  

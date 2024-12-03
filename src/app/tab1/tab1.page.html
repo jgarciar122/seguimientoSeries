@@ -17,6 +17,12 @@
       <ion-title size="large">Seguimiento de series</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/tabs/tab2">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  
 
   <ion-segment [(ngModel)]="segment">
     <ion-segment-button value="all">
@@ -30,29 +36,28 @@
     </ion-segment-button>
   </ion-segment>
 
-  <ion-card *ngFor="let serie of filtrarSeries(); let i = index">
+  <ion-card *ngFor="let serie of filteredSeries(); let i = index" (click)="verDetalle(serie)">
     <img alt="{{ serie.title }}" [src]="serie.image" />
     <ion-card-header>
       <ion-card-title>{{ serie.title }}</ion-card-title>
       <ion-card-subtitle>{{ serie.description }}</ion-card-subtitle>
     </ion-card-header>
-
+  
     <ion-card-content>
       <ion-item>
         <ion-checkbox [(ngModel)]="serie.vista"></ion-checkbox>
       </ion-item>
-
+  
       <ion-buttons>
-        <ion-button color="primary" (click)="editarSerie(i)">
+        <ion-button color="primary" (click)="editarSerie(i, $event)">
           <ion-icon slot="start" name="create"></ion-icon>
           Editar
         </ion-button>
-
-        <ion-button color="danger" (click)="eliminarSerie(i)">
+  
+        <ion-button color="danger" (click)="eliminarSerie(i, $event)">
           <ion-icon slot="start" name="trash"></ion-icon>
           Eliminar
         </ion-button>
       </ion-buttons>
     </ion-card-content>
   </ion-card>
-</ion-content>

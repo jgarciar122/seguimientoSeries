@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -14,7 +14,8 @@ export class Tab1Page {
   constructor(
     private route: ActivatedRoute, 
     private alertController: AlertController,
-    private router: Router
+    private router: Router,
+    private modalController: ModalController
   ) {}
 
   ionViewWillEnter() {
@@ -33,7 +34,7 @@ export class Tab1Page {
     return Tab1Page.series;
   }
 
-  filtrarSeries() {
+  filteredSeries() {
     if (this.segment === 'vistas') {
       return this.series.filter(serie => serie.vista);
     } else if (this.segment === 'no-vistas') {
@@ -43,7 +44,8 @@ export class Tab1Page {
     }
   }
 
-  async eliminarSerie(index: number) {
+  async eliminarSerie(index: number, event: Event) {
+    event.stopPropagation(); // Evitar que se propague el evento click del ion-card
     const alert = await this.alertController.create({
       header: 'Confirmar eliminación',
       message: '¿Estás seguro de que deseas eliminar esta serie?',
@@ -64,7 +66,8 @@ export class Tab1Page {
     await alert.present();
   }
 
-  async editarSerie(index: number) {
+  async editarSerie(index: number, event: Event) {
+    event.stopPropagation(); // Evitar que se propague el evento click del ion-card
     const serie = this.series[index];
     const alert = await this.alertController.create({
       header: 'Editar Serie',
@@ -109,4 +112,9 @@ export class Tab1Page {
 
     await alert.present();
   }
+
+  verDetalle(serie: any) {
+    this.router.navigate(['/tabs/tab3'], { queryParams: { serie: JSON.stringify(serie) } });
+  }
+
 }

@@ -10,20 +10,20 @@
   <form #serieForm="ngForm">
     <ion-item>
       <ion-label position="stacked">Título</ion-label>
-      <ion-input type="text" [(ngModel)]="nuevaSerie.title" name="title" required></ion-input>
+      <ion-input type="text" [(ngModel)]="nuevaSerie.title" name="title" required placeholder="Campo Obligatorio"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="stacked">Descripción</ion-label>
-      <ion-input type="text" [(ngModel)]="nuevaSerie.description" name="description" required></ion-input>
+      <ion-input type="text" [(ngModel)]="nuevaSerie.description" name="description"  required placeholder="Campo Obligatorio"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="stacked">URL de la Imagen</ion-label>
-      <ion-input type="url" [(ngModel)]="nuevaSerie.image" name="image" required></ion-input>
+      <ion-input type="url" [(ngModel)]="nuevaSerie.image" name="image" required placeholder="Campo Obligatorio"></ion-input>
     </ion-item>
 
-    <ion-button expand="block" (click)="guardarSerie()" [disabled]="!serieForm.valid">
+    <ion-button expand="block" (click)="guardarSerie()">
       Guardar Serie
     </ion-button>
   </form>
